@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha512-iQQV+nXtBlmS3XiDrtmL+9/Z+ibux+YuowJjI4rcpO7NYgTzfTOiFNm09kWtfZzEB9fQ6TwOVc8lFVWooFuD/w==" crossorigin="anonymous" referrerpolicy="no-referrer" /> <!-- bootstrap-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> <!-- semantic UI-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <title>Soda Diner</title>
+</head>
+<style>
+    .navbar-brand {font-size: 50px; cursor: pointer;font-family: brush script mt, impact, Arial;}
+    h1.lead {font-family: brush script mt, impact, Arial ; text-shadow: 1px 1px 1px black; font-size: 70px; cursor:default}
+</style>
+<body>
+    <nav id="navbar-site" class="navbar navbar-dark bg-dark navbar-expand-sm py-3">
+        <div class="container">
+            <div class="navbar-brand text-warning py-0">Soda Diner <i class="fa fa-home"></i></div>
+            <button class="navbar-toggler" type="button"
+            data-toggle="collapse" data-target="#myTogglerNav">
+            <span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse " id="myTogglerNav"> <!-- hamburger menu-->
+                <div class="navbar-nav ml-auto">
+                    <button id="SodaBtn" class=" ui button massive yellow p-2 mx-3">All Sodas</button>
+                    <button id="DinerBtn" class=" ui button massive yellow p-2 mx-3">All Diners</button>
+                </div><!-- navbar -->
+            </div><!-- collapse -->
+        </div><!-- container -->
+    </nav><!-- nav -->
+    
+    <div class="container text-center">
+        <h1 class="lead my-5 display-4 text-warning">Welcome to the <span class="text-danger">Soda</span> Diner!</h1>
+        <p class="lead display-5">Created by Zach Talmadge</p>
+        <hr>
+        <div class="row">
+            <div class="col-6">
+                <div id="intro">
+                    <p class="lead my-0">Click on "All Sodas" or "All Diners" to view each collection.</p>
+                    <br>
+                    <p class="lead my-0">Upon viewing you will have the option of creating your own soda or diner!</p>
+                    <br>
+                    <p class="lead my-0">When viewing details for a diner you will be able to add and remove to the list of sodas being served.</p>
+                    <br>
+                    <p class=lead>You may edit the details of Sodas and Diners after creating them should you choose to do so.</p>
+                    <br>
+                    <p class="lead my-0">Thank you for visiting and enjoy!</p>
+                    <i class="d-block">Brought to you by:</i>
+                    <img class="img-fluid w-50" src="./img/lastMile.png" alt="The Last Mile logo">
+                </div><!-- end content div-->
+                <div id="Sodas">
+                    <div id="SodaList"></div>
+                    <hr>
+                    <button id="addSodaBtn" class="ui huge button right labeled icon" data-toggle="modal" data-target="#AddSodaModal"><i class="add icon"></i>Add Soda</button>
+                </div> <!-- end allSodas div-->
+                <div id="Diners">
+                    <div id="DinerList"></div>
+                    <hr>
+                    <button id="addDinerBtn"class="red ui huge button right labeled icon" data-toggle="modal" data-target="#AddDinerModal"><i class="add icon"></i>Add Diner</button>
+                </div> <!-- end allDiners div-->
+            </div><!-- end col-->
+            <div class="col-6">
+                <img id="dinerImg" class="img-fluid rounded shadow" src="img/diner.jpeg">
+                <div id="details"></div>
+            </div><!-- col-->
+        </div><!-- end row-->
+    </div><!-- end container-->
+
+<!------------ modals below ------------>
+      
+<!-- Add Soda Modal -->
+<div class="modal fade" id="AddSodaModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Create A Soda</h5>
+            <button type="button" class="close" data-dismiss="modal">
+            <span>&times;</span> <!-- close button-->
+            </button>
+        </div> <!-- end header-->
+        <div class="modal-body">
+            <form id="addSoda">
+                <input id="sodaName" class="form-control my-4" type="text" placeholder="Name" required>
+                <input id="fizziness" class="form-control my-4" type="text" placeholder="Fizziness (1 - 10)" required>
+                <input id="taste-rating" class="form-control my-4" type="text" placeholder="Taste Rating (1 - 10)" required>
+                <button type="submit" class="ui button btn-block">Submit</button>
+                <div id="newSodaAlert"></div>
+            </form>
+        </div> <!-- end body-->
+        </div> <!-- end content-->
+    </div><!-- end dialog-->
+</div><!-- end modal-->
+
+<!-- Add Diner Modal -->
+<div class="modal fade" id="AddDinerModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Create A Diner</h5>
+            <button type="button" class="close" data-dismiss="modal">
+            <span>&times;</span> <!-- close button-->
+            </button>
+        </div> <!-- end header-->
+        <div class="modal-body">
+            <form id="addDiner">
+                <input id="dinerName"class="form-control my-4" type="text" placeholder="Name" required>
+                <input id="dinerLocation" class="form-control my-4" type="text" placeholder="Location" required>
+                <button type="submit" class="ui button red btn-block">Submit</button>
+                <div id="newDinerAlert"></div>
+            </form>
+        </div> <!-- end body-->
+        </div> <!-- end content-->
+    </div><!-- end dialog-->
+</div><!-- end modal-->
+
+<!-- Serve Soda Modal-->
+<div class="modal fade" id="serveSoda" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Available Sodas</h5>
+            <button type="button" class="close" data-dismiss="modal" >
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div><!-- end modal header-->
+        <div id="availableSodas"class="modal-body text-center">
+            <!-- sodas to be rendered here-->
+        </div><!-- end modal body-->
+        </div> <!-- end modal content-->
+    </div><!-- end modal dialog-->
+</div><!-- end modal-->
+
+<!-- Edit Soda Modal-->
+<div class="modal fade" id="editSodaModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit A Soda</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                <span>&times;</span> <!-- close button-->
+                </button>
+            </div> <!-- end header-->
+            <div class="modal-body">
+                <form id="editSoda">
+                    <p>You may edit one or all fields.</p>
+                    <input id="editSodaName" class="form-control my-4" type="text" placeholder="Name">
+                    <input id="editFizziness" class="form-control my-4" type="text" placeholder="Fizziness (1 - 10)">
+                    <input id="editTaste-rating" class="form-control my-4" type="text" placeholder="Taste Rating (1 - 10)">
+                    <button id="editSodaSubmit" type="submit" class="ui button btn-block">Submit</button>
+                    <div id="editSodaAlert"></div>
+                </form>
+            </div> <!-- end body-->
+            </div> <!-- end content-->
+        </div><!-- end dialog-->
+    </div><!-- end modal-->
+
+<!-- Edit Diner Modal-->
+<div class="modal fade" id="editDinerModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit A Diner</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                <span>&times;</span> <!-- close button-->
+                </button>
+            </div> <!-- end header-->
+            <div class="modal-body">
+                <form id="editDiner">
+                    <input id="editDinerName" class="form-control my-4" type="text" placeholder="Name">
+                    <input id="editDinerLocation" class="form-control my-4" type="text" placeholder="Location">
+                    <button id="editDinerSubmit" type="submit" class="ui button btn-block">Submit</button>
+                    <div id="editDinerAlert"></div>
+                </form>
+            </div> <!-- end body-->
+            </div> <!-- end content-->
+        </div><!-- end dialog-->
+    </div><!-- end modal-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha512-n6dYFOG599s4/mGlA6E+YLgtg9uPTOMDUb0IprSMDYVLr0ctiRryPEQ8gpM4DCMlx7M2G3CK+ZcaoOoJolzdCg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="./js/home.js"></script>
+</body>
+</html>
